@@ -1,0 +1,36 @@
+{
+  "name": "plantilla-vue",
+  "version": "0.0.0",
+  "main": "background.js",
+  "author": "Jesus Camero camerojesus@gmail.com",
+  "description": "Plantilla para proyectos Vue 3 con Vite y Vuetify",
+  "private": true,
+  "scripts": {
+    "electron:dev": "concurrently \"vite\" \"electron .\"",
+    "electron:serve": "vite build && electron .",
+    "electron:build": "vite build && electron-packager . plantilla-vue --overwrite --asar --platform=win32 --arch=x64 --icon=src/assets/logo.png --prune=true --out=release-builds",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "serve": "electron ."
+  },
+  "dependencies": {
+    "@mdi/font": "^7.4.47",
+    "axios": "^1.6.7",
+    "mariadb": "^3.2.3",
+    "pinia": "^2.1.7",
+    "vue": "^3.4.15",
+    "vue-router": "^4.2.5",
+    "vuetify": "^3.5.8"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.3",
+    "concurrently": "^8.2.2",
+    "electron": "^29.1.1",
+    "electron-packager": "^15.5.2",
+    "node-sass": "^9.0.0",
+    "sass": "^1.71.1",
+    "sass-loader": "^14.1.1",
+    "vite": "^5.0.11"
+  }
+}
