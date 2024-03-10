@@ -1,17 +1,27 @@
-import { fileURLToPath, URL } from 'node:url'
-
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { getSrcPath } from './pathUtils';
 
-// https://vitejs.dev/config/
 export default defineConfig({
+  plugins: [vue()],
   base: './',
-  plugins: [
-    vue(),
-  ],
+    optimizeDeps: {
+      exclude: ['electron']
+    },
+  build: {
+    // Configuración específica para el build de Electron
+    rollupOptions: {
+      // Asegura que Vite no empaquete módulos que no deberían estar en el bundle del navegador.
+      external: ['electron'],
+      output: {
+        // Configura esto según las necesidades de tu proyecto
+      },
+    },
+
+  },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
+      '@': getSrcPath(),
+    },
+  },
 })

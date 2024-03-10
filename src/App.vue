@@ -12,6 +12,10 @@
     <v-btn v-on:click="bMultiplicarDIV=!bMultiplicarDIV" style="text-transform:none;">
       Alternar mostrar DIV
     </v-btn>
+    <p>Si soy el nuevo</p>
+    <v-btn v-on:click="solicitarDatos">
+      Solicitar datos
+    </v-btn>
     <div v-if="bMultiplicarDIV" style="display:flex;flex-direction:column;align-items:center;">
        <div class="box"></div>
        <div class="box"></div>
@@ -56,8 +60,21 @@ export default {
     };
   },
   methods: {
-    // tus métodos aquí
+    solicitarDatos() {
+      window.electronAPI.send('realizar-consulta', 'SELECT * FROM deposito');
+      window.electronAPI.on('consulta-realizada', (result) => {
+        this.datos = result;
+        console.log(this.datos);
+
+        alert("llego la data");
+      });
+      window.electronAPI.on('consulta-error', (error) => {
+        console.error(error);
+        // Manejar error
+      });
+    }
   },
+
   beforeCreate() {
     // código antes de crear el componente
   },
